@@ -1,0 +1,50 @@
+<footer class="l-footer">
+  <div class="container l-footer-nav">
+    <div class="row">
+      <div class="col-sm-3">
+        <h3>注文について</h3>
+        <ul class="l-footer-nav-menu">
+          <li><a href="{{ url(app.config.user_data_route, {'route': 'readme'}) }}">初めての方</a></li>
+          <li><a href="/user_data/guide/flow">注文の流れ</a></li>
+          <li><a href="/user_data/guide/draft">デザインデータ入稿について</a></li>
+          <li><a href="/user_data/guide/price">価格について</a></li>
+          <li><a href="/user_data/guide/shippingday">配送について</a></li>
+          <li><a href="/user_data/guide/posting">投函について</a></li>
+          <li><a href="/user_data/guide/deliverygday">納期について</a></li>
+          <li><a href="/user_data/guide/pay">お支払い方法</a></li>
+          <li><a href="/user_data/guide/cancel">キャンセル、返金交換について</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <h3>宛名印刷</h3>
+        <ul class="l-footer-nav-menu">
+          <li><a href="/user_data/guide/flow">注文の流れ</a></li>
+          <li><a href="/user_data/guide/address">宛名印刷レイアウト</a></li>
+          <li><a href="/user_data/guide/list">住所録データの作成について</a></li>
+        </ul>
+        <h3>困ったとき</h3>
+        <ul class="l-footer-nav-menu">
+          <li><a href="/user_data/guide/faq">よくある質問</a></li>
+          <li><a href="http://contact.dm-house.jp">お問い合わせ</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 visible-lg visible-md visible-sm">
+        <div class="info-area">
+          <a href="{{ url('homepage') }}"><img class="logo" src="{{ app.config.front_urlpath }}/img/common/logo.png" alt="DMハウス"></a><img class="phone-icon" src="{{ app.config.front_urlpath }}/img/common/icon_telephone.png" alt="電話"><div class="phone-info phone-info-footer"><p class="title">お問い合わせ電話番号 /</p><p class="phone-number">03-5918-8046</p><p class="sub-info">受付時間：10：00～18：00　定休日：土日祝</p></div>
+        </div>
+      </div>
+    </div>
+    <ul class="l-footer-link">
+      <!--li><a href="/help/about">会社概要</a></li-->
+      <li><a href="/help/tradelaw">特定商取引法に基づく表記</a></li>
+      <li><a href="/help/agreement">ご利用規約</a></li>
+      <li><a href="/help/privacy">プライバシーポリシー</a></li>
+    </ul>
+    <!-- toTop -->
+    <div id="page-top" style="display: block;"><a href="#wrap"><i class="fa fa-angle-up" aria-hidden="true"></i></a></div>
+    <!-- /toTop -->
+  </div>
+  <div class="l-footer-copyright">
+    <p>&copy;株式会社フューチャースタイル all rights reserved.</p>
+  </div>
+</footer>

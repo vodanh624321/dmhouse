@@ -1,0 +1,23 @@
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'front_page' %}
+
+{% block eyecatch %}
+	<div class="l-eyecatch">
+	  <a class="visible-lg visible-md visible-sm" href="http://153.121.44.230/staging/printsendhtml/product_detail.html"><img src="{{ app.config.front_urlpath }}/img/eyecatch/eyecatch.jpg" alt="ダイレクトメールの定番商品です！通常ハガキ99円"></a>
+	  <a class="visible-xs" href="http://153.121.44.230/staging/printsendhtml/product_detail.html"><img src="{{ app.config.front_urlpath }}/img/eyecatch/eyecatch-sp.jpg" alt="ダイレクトメールの定番商品です！通常ハガキ99円"></a>
+	</div>
+{% endblock %}
+
+{% block main %}
+   <div class="l-banner">
+    <a href="http://153.121.44.230/staging/printsendhtml/product_detail.html"><img src="{{ app.config.front_urlpath }}/img/banner/banner_01.jpg" alt="圧着はがきおトクなキャンペーン実施中！"></a>
+    <!--<a href="#"><img src="{{ app.config.front_urlpath }}/img/banner/banner_02.jpg" alt="キャンペーンバナーエリアキャンペーン掲載分だけ追加されます"></a>-->
+  </div>
+  
+  <h2><span></span>取扱商品</h2>
+  <ul class="l-banner-sm">
+    <li><a href="http://153.121.44.230/staging/printsendhtml/product_detail.html"><img src="{{ app.config.front_urlpath }}/img/banner/banner-sm_01.jpg" alt="ダイレクトメールの定番商品 通常ハガキ"></a></li>
+    <!--<li><a href="#"><img src="{{ app.config.front_urlpath }}/img/banner/banner-sm_02.jpg" alt="以下、掲載する商品数分のバナーが入ります"></a></li>-->
+  </ul>
+{% endblock %}

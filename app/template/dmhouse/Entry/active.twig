@@ -1,0 +1,46 @@
+{% extends 'default_frame.twig' %}
+
+{% block breadcrumb %}
+    <div class="l-breadcrumb container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url('homepage') }}">TOP</a></li>
+      <li class="breadcrumb-item">{{title}}</li>
+    </ol>
+  </div>
+{% endblock %}
+
+{% set body_class = 'registration_page' %}
+
+{% block main %}
+    
+  <h2>利用規約</h2>
+
+  <div class="flow-box" class="row">
+     <div class="flow-box-item col-sm-3">
+      <p>規約承認</p>
+     </div>
+     <div class="flow-box-item col-sm-3">
+      <p>登録内容入力</p>
+     </div>
+     <div class="flow-box-item col-sm-3">
+      <p>入力内容確認</p>
+     </div>
+     <div class="flow-box-item col-sm-3">
+      <p class="active">登録完了</p>
+     </div>
+  </div>
+
+  <div class="contact-form">
+        
+    <p>
+      会員登録いただきありがとうございます。<br>
+      ご入力頂きましたメールアドレス宛に確認のメールをお送りさせて頂きました。<br>
+      <br>
+      お客様から頂いたEメールアドレスが違っている場合や、<br>
+      システム障害などにより確認メールを上手くお送りできない場合がございます。
+    </p>
+    
+    
+  </div>
+
+{% endblock %}

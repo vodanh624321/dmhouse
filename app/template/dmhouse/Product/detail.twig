@@ -1,0 +1,207 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) 2000-2015 LOCKON CO.,LTD. All Rights Reserved.
+
+http://www.lockon.co.jp/
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#}
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'product_page' %}
+
+
+{% block stylesheet %}
+<style type="text/css">
+    .pricelist .price-image img {
+        max-width: 100%;
+    }
+</style>
+{% endblock %}
+{% block javascript %}
+<script>
+var arrPrice = {{ Product.ProductPrice.prices|json_encode|raw }};
+var key = 'price01';
+var total = arrPrice['price01'];
+$(function(){
+    // $('#add-cart').click(function() {
+    //     $('#mode').val('add_cart');
+    // });
+    
+    $('#quantity').change(function() {
+        var quantity = $(this).val();
+        calPrice(quantity);
+        return true;
+    });
+    calPrice($('#quantity').val());
+
+    $('.category').change(function() {
+        var class_id = $(this).data('class');
+        console.log(class_id);
+        $('#product_class_id').val(class_id);
+    });
+});
+    function calPrice(quantity = 1) {
+        if ($.isNumeric(quantity) && quantity > 0) {
+            if (quantity <= 100) {
+                key = 'price01';
+            } else if (quantity <= 200) {
+                key = 'price02';
+            } else if (quantity <= 300) {
+                key = 'price03';
+            } else if (quantity <= 400) {
+                key = 'price04';
+            } else if (quantity <= 500) {
+                key = 'price05';
+            } else if (quantity <= 1000) {
+                key = 'price06';
+            } else if (quantity <= 1500) {
+                key = 'price07';
+            } else if (quantity <= 2000) {
+                key = 'price08';
+            } else {
+                alert('お見積もり');
+                return false;
+            }
+        } else {
+            alert('Please input correct');
+            return false;
+        }
+
+// console.log(key);
+// console.log(arrPrice[key]);
+        if (arrPrice[key]) {
+            total = arrPrice[key] * quantity;
+            // console.log(total);
+            document.getElementById("price").innerHTML = '￥'+total;
+        }
+        return true;
+    }
+</script>
+
+{% endblock %}
+
+{% block main %}
+    {# todo ブロック化}
+    <div id="topicpath" class="row">
+        {% for ProductCategory in Product.ProductCategories %}
+        <ol>
+            <li><a href="{{ url('product_list') }}">全商品</a></li>
+            {% for Category in ProductCategory.Category.path %}
+                <li><a href="{{ url('product_list') }}?category_id={{ Category.id }}">{{ Category.name }}</a></li>
+            {% endfor %}
+            <li>{{ Product.name }}</li>
+        </ol>
+        {% endfor %}
+    </div>
+    #}
+
+<div class="l-breadcrumb container">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="http://153.121.44.230/staging/printsendhtml/">TOP</a></li>
+    <li class="breadcrumb-item">通常ハガキ</li>
+  </ol>
+</div>
+
+    <div class="product-detail row">
+        <div id="product-detail-image-area" class="product-detail-image-area col-sm-6">
+            <div id="detail_image_box__slides" class="slides">
+                {% if Product.ProductImage|length > 0 %}
+                    <div id="detail_image_box__item"><img src="{{ app.config.image_save_urlpath }}/{{ Product.ProductImage[0]|no_image_product }}"/></div>
+                {% else %}
+                    <div id="detail_image_box__item"><img src="{{ app.config.image_save_urlpath }}/{{ ''|no_image_product }}"/></div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="product-detail-info-area col-sm-6">
+            <form action="?" method="post" id="form1" name="form1">
+            {{ form_widget(form._token) }}
+            <input type="hidden" id="product_id" name="product_id" value="{{Product.id}}">
+            <input type="hidden" id="product_class_id" name="product_class_id" value="{{form.product_class_id.vars.value}}">
+            <input type="hidden" id="mode" name="mode" value="add_cart">
+
+            <h2>{{ Product.name }}</h2>
+            <div class="product-detail-info-detail-area">
+              <p>{{ Product.class_name1 }}{% if Product.class_name2 is defined and Product.class_name2 is not null %} x {{ Product.class_name2 }}{% endif %}</p>
+              <p id="detail_description_box__item_range_code" class="item_code">商品コード： <span id="item_code_default">
+                        {{ Product.code_min }}
+                        {% if Product.code_min != Product.code_max %} ～ {{ Product.code_max }}{% endif %}
+                        </span> </p>
+            </div>
+            <div class="product-detail-option-area">
+            <!-- WIP -->
+            {#{% for productClass in Product.ProductClasses %}
+                {% if productClass.ClassCategory1 %}
+                    {% set key = productClass.ClassCategory1.id %}
+                    <input type="hidden" name="classcategory_id1" value="{{key}}">
+                    <label for="{{productClass.id}}"><input type="radio" name="classcategory_id1" value="{{productClass.id}}" id="{{productClass.id}}">{{ productClass.ClassCategory1.name}}
+                    {% if productClass.ClassCategory2 %} x {{ productClass.ClassCategory2.name}}
+                    {% set key2 = productClass.ClassCategory2.id %}
+                    <input type="hidden" name="classcategory_id2" value="{{key2}}">
+                    {% endif %}
+                    </label>
+                {% endif %}
+            {% endfor %}#}
+            {% if form.classcategory_id1 is defined %}
+                {% for key, classCategory in Product.class_categories %}
+                {% if key != '__unselected' %}
+                    <label for="{{ Product.class_categories1[key]}}">
+                    <input class="category" data-class="{{classCategory['#'].product_class_id}}" type="radio" name="classcategory_id1" value="{{key}}" id="{{ Product.class_categories1[key]}}">{{ Product.class_categories1[key]}}</label>
+                {% endif %}
+                {% endfor %}
+                {{ form_errors(form.classcategory_id1) }}
+            {% endif %}
+            </div>
+
+            <div class="product-detail-option-area">
+              <div class="product-detail-option-number">部数
+              {{ form_widget(form.quantity, { attr : { class : 'dd', style : 'width: 160px' } }) }}
+              {{ form_errors(form.quantity) }}
+              </div>
+            </div>
+
+            <div class="product-detail-price-area">
+              <p class="product-detail-price-title">合計金額：</p>
+              <p class="product-detail-price" id="price">￥{{Product.ProductPrice.price01}}</p>
+            </div>
+            <button id="add-cart" class="button button-red button-product-detail" type="submit" value="買い物カゴに入れる"><i class="fa fa-cart-plus" aria-hidden="true"></i>買い物カゴに入れる</button>
+            </form>
+        </div>
+    </div> 
+
+    <h2>価格例</h2>
+    <div class="pricelist row">
+    {% if Product.ProductPrice|length > 0 %}
+        {% if is_sp %}
+            <div class="price-image col-sm-12" ><img src="{{ app.config.image_save_urlpath }}/{{ Product.ProductPrice.sp_image|no_image_product }}"/></div>
+        {% else %}
+            <div class="price-image col-sm-12" ><img src="{{ app.config.image_save_urlpath }}/{{ Product.ProductPrice.pc_image|no_image_product }}"/></div>
+        {% endif %}
+    {% endif %}
+    </div>
+
+    {# フリーエリア #}
+    {% if Product.freearea %}
+    <div id="sub_area" class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div id="detail_free_box__freearea" class="freearea">{{ include(template_from_string(Product.freearea)) }}</div>
+        </div>
+    </div>
+    {% endif %}
+    <!-- </div> -->
+    <!-- ▲item_detail▲ -->
+{% endblock %}

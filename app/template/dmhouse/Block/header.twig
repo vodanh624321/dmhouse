@@ -1,0 +1,44 @@
+<header class="l-header">
+  <div class="l-header-main">
+    <div class="l-header-inner container">
+    
+      <!-- logo -->
+      <h1 class="l-header-logo pull-left">
+        <a href="{{ url('homepage') }}"><img src="{{ app.config.front_urlpath }}/img/common/logo.png" alt="レターハウス.com"></a>
+        <!--span class="visible-lg-inline visible-md-inline">サイトの簡単な説明サイトの簡単な説明</span-->
+      </h1>
+
+      <!-- sp menu button -->
+      <div class="l-header-sp-menu hidden-lg hidden-md hidden-sm">
+        <div id="sp-menu" class="menu-trigger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- pc header links -->
+      <div class="visible-lg visible-md visible-sm l-header-links pull-right">
+        <ul class="list-inline">
+          <li><img src="{{ app.config.front_urlpath }}/img/common/icon_telephone.png" alt="電話"><div class="phone-info"><p class="title">お問い合わせ電話番号 /</p><p class="phone-number">03-5918-8046</p><p class="sub-info">受付時間：10：00～18：00　定休日：土日祝</p></div></li>
+          <li><a href="/user_data/register/agreement" class="mb0 pull-right button button-sm"><i class="fa fa-cart-plus" aria-hidden="true"></i>
+マイページ登録</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  
+  <div class="l-header-navmenu visible-lg visible-md visible-sm">
+    <div class="container">
+      <ul class="gnav">
+        <li><a href="{{ url('homepage') }}">トップページ<br><span>TOP PAGE</span></a></li>
+        <li><a href="{{ url(app.config.user_data_route, {'route': 'readme'}) }}">初めての方<br><span>BEGINNER</span></a></li>
+        <li><a href="/user_data/guide/price">料金について<br><span>PRICE</span></a></li>
+        <li><a href="/user_data/guide/deliverygday">納期について<br><span>DELIVERY DATE</span></a></li>
+        <li><a href="/user_data/guide/faq">よくある質問<br><span>Q&A</span></a></li>
+        <li><a href="http://contact.dm-house.jp">お問い合わせ<br><span>CONTACT</span></a></li>
+      </ul>
+    </div>
+  </div>
+</header>
