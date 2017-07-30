@@ -1,0 +1,91 @@
+@charset "utf-8";
+/*
+ * ページング
+ * ページング用のCSS
+ */
+.pagination {
+  ul {
+    padding: 0;
+    list-style: none;
+    li {
+      display: inline-block;
+      a {
+        display: inline-block;
+        font-size: 13px;
+        color: $color-gray;
+        border:2px solid $color-lightgray;
+        vertical-align: middle;
+        margin-left:5px;
+        width: 40px;
+        height: 40px;
+        padding: 7px 5px 3px;
+        text-align: center;
+        box-sizing: border-box;
+				text-decoration:none;
+        &:hover {
+          text-decoration: none;
+          border-width: 2px;
+          border-color: $color-blue;
+          color: $color-blue;
+        }
+      }
+      &.active {
+        a {
+          background-color: $color-blue;
+          color: #fff;
+          border-color: $color-blue;
+          &:hover {
+            border-width: 1px;
+          }
+        }
+      }
+
+      &.previouspostslink,
+      &.nextpostslink {
+        a {
+          width: 100px;
+          border-color: $color-lightgray;
+          &:hover {
+            border-color: $color-blue;
+            padding-left: 6px;
+          }
+        }
+      }
+      &.previouspostslink {
+        a {
+          &:hover {
+            margin: 0px 1px 0px 4px;
+          }
+        }
+      }
+      &.nextpostslink {
+        a {
+          &:hover {
+            margin: 0px 1px 0px 4px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: $size_bootstrap_sp_bp) {
+  .pagination {
+    width: 100%;
+    ul {
+      li {
+        display: none;
+        &.previouspostslink,
+        &.nextpostslink {
+          display: inline-block;
+        }
+        &.previouspostslink {
+          float: left;
+        }
+        &.nextpostslink {
+          float: right;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

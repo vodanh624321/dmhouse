@@ -1,0 +1,113 @@
+@charset "utf-8";
+/*
+ * gnav
+ * グローバルナビゲーション
+ */
+.gnav {
+	margin: 0;
+	padding: 0;
+	font-size: 0;
+	li {
+        width: 16.66%;
+		box-sizing: border-box;
+		display: inline-block;
+		padding: 0;
+		text-align: center;
+		position: relative;
+		color: $color-black;
+        background: url(#{$path_img}common/gnav_bg.png) top right no-repeat;
+      &:last-child {
+        background: none;
+      }
+      &.active {
+		a {
+          color: $color-white;
+          background: -webkit-linear-gradient(90deg, #e30625 0%, #ff6e82 100%);
+          background: -moz-linear-gradient(90deg, #e30625 0%, #ff6e82 100%);
+          background: -o-linear-gradient(90deg, #e30625 0%, #ff6e82 100%);
+          background: -ms-linear-gradient(90deg, #e30625 0%, #ff6e82 100%);
+          background: linear-gradient(0deg, #e30625 0%, #ff6e82 100%);
+          opacity: 1;
+          span {
+            color: $color-white;
+          }          
+        }
+      }
+		a {
+			font-size: 14px;
+			font-weight: bold;
+			display: block;
+			line-height: 110%;
+			vertical-align: middle;
+			color: #282828;
+			padding: 14px 19px 15px;
+			@include transition(color 0.2s linear, background 0.2s linear);
+			text-decoration: none;
+          span {
+            color: $color-main;
+            font-size: 10px;
+            font-weight: normal;
+            @include transition(color 0.2s linear);
+          }
+          &:hover {
+            color: $color-white;
+            background: -webkit-linear-gradient(90deg, #e30625 0%, #ff6e82 100%);
+            background: -moz-linear-gradient(90deg, #e30625 0%, #ff6e82 100%);
+            background: -o-linear-gradient(90deg, #e30625 0%, #ff6e82 100%);
+            background: -ms-linear-gradient(90deg, #e30625 0%, #ff6e82 100%);
+            background: linear-gradient(0deg, #e30625 0%, #ff6e82 100%);
+            opacity: 1;
+            span {
+              color: $color-white;
+            }
+          }
+		}
+		&:hover {
+			ul {
+				display: block;
+			}
+		}
+	}
+}
+
+@media (max-width: 990px) {
+  .gnav {
+    li {
+      a {
+        font-size: 12px;
+        padding-top: 17px;
+        padding-bottom: 17px;
+      }
+    }
+  }
+}
+
+@media (max-width: $size_bootstrap_sp_bp) {
+  .subgnav {
+    background-color: #1c1c1c;
+    ul {
+      li {
+        padding-right: 30px;
+        &.active {
+          a {
+            color: #6cafdf;
+          }
+          &:before {
+            color: #6cafdf;
+          }
+        }
+        a {
+          color: #fff;
+          font-size: 12px;
+          line-height: 30px;
+        }
+        &:before {
+          font-family: $font_awesome;
+          content: '\f105';
+          margin-right: 5px;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

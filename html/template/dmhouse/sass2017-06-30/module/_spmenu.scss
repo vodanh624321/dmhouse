@@ -1,0 +1,138 @@
+@charset "utf-8";
+/*
+ * spmenu
+ * スマホメニューボタン
+ */
+.menu-trigger,
+.menu-trigger span {
+	display: inline-block;
+	transition: all .4s;
+	box-sizing: border-box;
+}
+.menu-trigger {
+	position: relative;
+	width: 25px;
+	height: 25px;
+}
+.menu-trigger span {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background-color: $color-white;
+	border-radius: 4px;
+}
+.menu-trigger span:nth-of-type(1) {
+	top: 0;
+}
+.menu-trigger span:nth-of-type(2) {
+	top: 12px;
+}
+.menu-trigger span:nth-of-type(3) {
+	bottom: 0;
+}
+.menu-trigger.active span:nth-of-type(1) {
+	-webkit-transform: translateY(20px) rotate(-45deg);
+	transform: translateY(20px) rotate(-45deg);
+}
+.menu-trigger.active span:nth-of-type(2) {
+	opacity: 0;
+}
+.menu-trigger.active span:nth-of-type(3) {
+	-webkit-transform: translateY(-20px) rotate(45deg);
+	transform: translateY(-20px) rotate(45deg);
+}
+
+.js-close-any {
+  .menu-trigger {
+    background-image: url('#{$path_img}common/sp_menu_on.png');    
+  }
+}
+
+.side-menu{
+	background-color: $color-main;
+  .sp-menu-close-button-area {
+    text-align: right;
+    height: 35px;
+    border-bottom: 1px solid #f5b190;
+    i {
+      font-size: 30px;
+      margin-right: $size-narrowmargin;
+    }
+  }
+    ul{
+		list-style: none;
+    padding: 0;
+		li{
+      border-bottom: 1px solid #f5b190;
+			a {
+				display: block;
+				width: 100%;
+				height: 100%;
+				padding: 10px;
+				text-decoration: none;
+				color:$color-white;
+              font-size: 11px;
+              span {
+                background: $color-white;
+                height: 25px;
+                width: 25px;
+                border-radius: 50%;
+                -moz-border-radius: 50%;
+                -webkit-border-radius: 50%;
+                display: inline-block;
+                vertical-align: middle;
+                text-align: center;
+                margin-right: 5px;
+                img {
+                  width: 60%;
+                }
+              }
+              &:hover{
+					background:#fff;
+				}
+			}
+		}
+  }
+  
+  .side-menu-contacttitle,
+  .side-menu-phone-number,
+  .side-menu-time,
+  .side-menu-holiday {
+    color: $color-white;
+    padding: 0 10px;
+    margin: 0;
+  }
+  .side-menu-contacttitle {
+    font-size: 11px;
+    img {
+      width: 14px;
+      margin-right: 5px;
+      vertical-align: top;
+    }
+  }
+  .side-menu-phone-number {
+    font-size: 17px;
+    font-weight: bold;
+  }
+  .side-menu-time {
+    font-size: 11px;
+    line-height: 150%;
+  }
+  .side-menu-holiday {
+    font-size: 11px;
+    line-height: 150%;
+  }
+}
+.sp-menu-cover {
+  &.open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $color-black;
+    opacity:			0.5;
+    z-index:			1;
+  }
+}

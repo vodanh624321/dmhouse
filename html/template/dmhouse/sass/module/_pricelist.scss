@@ -1,0 +1,58 @@
+@charset "utf-8";
+/*
+ * pricelist
+ * 価格表
+ */
+.pricelist {
+  margin-top: $size-widemargin;
+  .nav {
+    &.nav-tabs {
+      border-bottom: 3px solid #e3e2e2;
+      &>li>a {
+        margin-right: 0;
+      }
+    }
+    .nav-item {
+      border-top: 3px solid #e3e2e2;
+      border-left: 3px solid #e3e2e2;
+      border-right: 3px solid #e3e2e2;
+      @include border-top-left-radius(5px);
+      @include border-top-right-radius(5px);
+      margin-left: 4px;
+      margin-right: 4px;
+      font-size: 16px;
+      font-weight: bold;
+      &.active {
+        a {
+          background-color: #f5f5f5;          
+        }
+      }
+      a {
+        &:before {
+          content: '●';
+          color: #e30625;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  margin-bottom: $size-widemargin;
+  table {
+    border-bottom: 1px solid $color-borderdarkgray;
+    tbody {
+      tr {
+        td {
+          vertical-align: middle;
+          padding: 15px 20px;
+          border: none;
+          .price {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $size_sp_bp) {
+}

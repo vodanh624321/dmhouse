@@ -1,0 +1,51 @@
+@charset "utf-8";
+/*
+ * l-sidemenu
+ * コンテンツブロック
+ */
+
+.l-sidemenu{
+	float: left !important;
+	h3{
+		font-size:16px;
+		font-weight:bold;
+		margin-bottom:15px;
+	}
+	.l-sidemenu-list{
+		list-style:none;
+		background:whitesmoke;
+		padding:0;
+		li{
+			display: block;
+			position: relative;
+			padding: 0;
+			cursor: pointer;
+			border: 1px solid $color-lightgray;
+			border-top:none;
+			&:first-child{
+				border-top: 1px solid $color-lightgray;
+			}
+			a{
+				text-decoration:none;
+				font-size:13px;
+				color:$color-font-gray;
+				padding: 11px 15px 11px 20px;
+				width:100%;
+				display:block;
+				&:hover{
+					background:$color-lightgray;
+					&:after {
+						content: "\f105";
+						font-family: FontAwesome;
+						font-style: normal;
+						font-weight: normal;
+						text-decoration: inherit;
+						font-size: 18px;
+						position: absolute;
+						right: 20px;
+					}
+				}
+			}
+		}
+	}
+}

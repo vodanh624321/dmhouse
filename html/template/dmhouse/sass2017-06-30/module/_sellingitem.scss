@@ -1,0 +1,147 @@
+@charset "utf-8";
+/*
+ * sellingitem
+ * 売れ筋アイテム
+ */
+.sellingitem {
+  margin-left: -10px;
+  margin-right: -10px;
+  list-style: none;
+  padding: 0;
+  li {
+    width: 33.33%;
+    padding: 0 10px 20px;
+    display: inline-block;
+    list-style: none;
+    vertical-align: top;
+    div {
+      &.sellingitem-box {
+        padding: $size-widemargin $size-widemargin;
+        margin: 0;
+        border: 1px solid $color-borderdarkgray;
+      }
+      .sellingitem-img {
+        padding: 0;
+        text-align: center;
+        border: none;
+        margin-bottom: $size-widemargin;
+        img {
+          max-width: 100%;
+          max-height: 94px;
+        }
+      }
+    }
+    p {
+      font-size: 14px;
+      color: $color-darkgray;
+      line-height: 175%;
+      &.sellingitem-name {
+        margin-bottom: $size-widemargin;
+      }
+      &.sellingitem-price-title {
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+      &.sellingitem-price {
+        text-align: right;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      &.sellingitem-tocart {
+        text-align: right;
+        margin:0;
+      }
+    }
+    span {
+      &.sellingitem-price-strong {
+        font-size: 16px;
+        color: $color-red;
+      }
+    }
+  }
+}
+
+@media (max-width: $size_sp_bp) {
+  .sellingitem {
+    margin-left: -5px;
+    margin-right: -5px;
+    li {
+      width: 50%;
+      padding: 0 5px 10px;
+      div {
+        &.sellingitem-box {
+          padding: $size-widemargin $size-narrowmargin;
+        }
+      }
+      p {
+        font-size: 12px;
+        color: $color-darkgray;
+        line-height: 175%;
+        &.sellingitem-name {
+          margin-bottom: $size-narrowmargin;
+        }
+        &.sellingitem-price-title {
+          font-size: 10px;
+        }
+        &.sellingitem-price {
+          font-size: 11px;
+        }
+        &.sellingitem-tocart {
+          img {
+            max-width: 100%;
+          }
+        }
+      }
+      span {
+        &.sellingitem-price-strong {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+.sellingitem-nav {
+  list-style: none;
+  padding: 0;
+  li {
+    padding-top: $size-widemargin;
+    padding-bottom: $size-narrowmargin;
+    margin: 0;
+    list-style: none;
+    border-bottom: 1px solid $color-borderdarkgray;
+    div {
+      &.sellingitem-img {
+        border: 1px solid $color-borderdarkgray;
+        padding: 5px;
+        text-align: center;
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+    }
+    p {
+      font-size: 12px;
+      color: $color-darkgray;
+      line-height: 175%;
+      &.sellingitem-name {
+        margin-bottom: $size-narrowmargin;
+      }
+      &.sellingitem-price {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      &.sellingitem-tocart {
+        text-align: right;
+        margin:0;
+      }
+    }
+    span {
+      &.sellingitem-price-strong {
+        font-size: 16px;
+        color: $color-red;
+      }
+    }
+  }
+}

@@ -1,0 +1,231 @@
+@charset "utf-8";
+/*
+ * l-header
+ * ヘッダーのレイアウト
+ */
+.l-header {
+  width: 100%;
+  height: 150px;
+  
+  .l-header-main {
+    background: $color-main url(#{$path_img}common/header-main-bg.png) top right no-repeat;
+    .l-header-inner {
+      .l-header-logo {
+        margin-top: 20px;
+        margin-bottom: 0;
+        margin-left: 0;
+        img {
+          vertical-align: top;
+        }
+        span {
+          color: $color-white;
+          font-size: 12px;
+          font-weight: normal;
+          vertical-align: middle;
+        }
+      }
+      .l-header-sp-menu {
+        float: right;
+        margin: 13px 10px 0 0;
+      }
+      .l-header-links {
+        margin-top: 5px;
+        ul {
+          margin-bottom: 8px;
+        }
+        a {
+          font-size: 14px;
+          font-weight: bold;
+        }
+        img {
+          vertical-align: top;
+          margin-top: 15px;
+          margin-right: 5px;
+        }
+      }
+
+      .l-header-sp-contact {
+              float: right;
+              margin: 10px 10px 0 0;
+      }
+      .l-header-cv-area {
+        position: absolute;
+        right: 0;
+        top: 20px;
+        .l-header-cv-area-info {
+          width: 270px;
+          text-align: right;
+          display: inline-block;
+          vertical-align: top;
+          margin-right: 5px;
+          letter-spacing: 0;
+          p {
+            margin: 0;
+          }
+          .l-header-cv-area-info-phonenumber {
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 22px;
+                      margin-right: 5px;
+                      i {
+                          margin-right: 5px;
+                    }
+          }
+          .l-header-cv-area-info-businesshours {
+            font-size: 10px;
+            font-weight: bold;
+            margin-top: 0px;
+            letter-spacing: 0.5px;
+          }
+        }
+        .l-header-cv-area-contact {
+          width: 290px;
+          display: inline-block;
+          margin-right: 5px;
+        }
+      }
+      .l-header-gnav {
+        margin-top: 13px;
+        .l-header-gnav-solution {
+          width: 960px;
+          .gnav-item-box {
+            min-height: 510px;
+          }
+        }
+        .l-header-gnav-case {
+          width: 240px;
+        }
+        .l-header-gnav-service {
+          width: 480px;
+        }
+        .l-header-gnav-download {
+          width: 240px;
+        }
+        .l-header-gnav-about {
+          width: 240px;
+        }
+      }
+    }
+  }
+  
+  .l-header-navmenu {
+    background: -webkit-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
+    background: -moz-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
+    background: -o-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
+    background: -ms-linear-gradient(90deg, #ededed 0%, #ffffff 100%);
+    background: linear-gradient(0deg, #ededed 0%, #ffffff 100%);
+    border-top: 2px solid $color-black;
+    border-bottom: 2px solid $color-black;
+  }
+  
+  .l-header-inner {
+    .l-header-logo {
+      margin-top: 30px;
+      margin-bottom: 0;
+      margin-left: 0;
+      img {
+        vertical-align: top;
+      }
+    }
+    .l-header-sp-menu {
+      float: right;
+      margin: 15px 10px 0 0;
+    }
+    .l-header-links {
+      margin-top: 5px;
+      a {
+        font-size: 12px;
+      }
+    }
+
+    .l-header-sp-contact {
+			float: right;
+			margin: 10px 10px 0 0;
+    }
+    .l-header-cv-area {
+      position: absolute;
+      right: 0;
+      top: 20px;
+      .l-header-cv-area-info {
+        width: 270px;
+        text-align: right;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 5px;
+        letter-spacing: 0;
+        p {
+          margin: 0;
+        }
+        .l-header-cv-area-info-phonenumber {
+          font-size: 18px;
+          font-weight: bold;
+          line-height: 22px;
+					margin-right: 5px;
+					i {
+						margin-right: 5px;
+				  }
+        }
+        .l-header-cv-area-info-businesshours {
+          font-size: 10px;
+          font-weight: bold;
+          margin-top: 0px;
+          letter-spacing: 0.5px;
+        }
+      }
+      .l-header-cv-area-contact {
+        width: 290px;
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+    .l-header-gnav {
+      margin-top: 13px;
+      .l-header-gnav-solution {
+        width: 960px;
+        .gnav-item-box {
+          min-height: 510px;
+        }
+      }
+      .l-header-gnav-case {
+        width: 240px;
+      }
+      .l-header-gnav-service {
+        width: 480px;
+      }
+      .l-header-gnav-download {
+        width: 240px;
+      }
+      .l-header-gnav-about {
+        width: 240px;
+      }
+    }
+  }
+  .l-header-subgnav {
+    background-color: #1c1c1c;
+    height: 30px;
+  }
+}
+
+
+@media (max-width: $size_sp_bp) {
+  .l-header {
+    height: 50px;
+    border-bottom:solid 2px $color-black;
+    background: $color-main;
+    .l-header-main {
+      height: 48px;
+      background: $color-main url(#{$path_img}common/header-main-bg-sp.png) top right no-repeat;
+      .l-header-inner {
+        .l-header-logo {
+          margin-top: 13px;
+          margin-left: 0;
+          font-size: 0;
+          text-align: center;
+          img {
+            max-width: 110px;
+          }
+        }
+      }
+    }
+  }
+}

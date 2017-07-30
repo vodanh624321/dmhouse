@@ -1,0 +1,15 @@
+@charset "utf-8";
+/*
+ * l-contents
+ * ヘッダーを除くコンテンツ箇所
+ */
+.l-contents {
+  margin-bottom: $size-widemargin;
+}
+
+
+@media (max-width: $size_sp_bp) {
+  .l-contents {
+    margin-bottom: $size-widemargin-sp;
+  }
+}

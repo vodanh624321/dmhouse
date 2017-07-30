@@ -1,0 +1,32 @@
+﻿lammn90@gmail.com/ mailam123
+https://gitlab.com/lammn90/dmhouse
+
+Login info
+http://dm-house.jp
+ID: dmhouse PASS: dmhouse
+EC-CUBE
+http://dm-house.jp/admin/
+ID: dwe27460 PASS: dmec0721
+
+
+1. Man hinh product detail
+Chi hien thi radio button 用紙
+ => thiet lap boi product class va hien thi ra theo kieu radio button. 
+khong anh huong den gia tien cua san pham
+
+2. Man hinh admin product 
+Khach hang mong muon la gia tien cua san pham se thay doi theo so luong 
+cua san pham 
+VD
+
+Product   So luong  Don gia 1 san pham Thanh tien 
+Barcode    1~100    93                           9300
+              200~300   80                           XXX
+
+3. Khi order xong thi dinh kem them link 
+http://uploader.dm-house.jp?id=XXX vao trong mail gui cho khach hang
+
+4. Co cach nao de lam dep URL voi nhung cai URL user tu tao khong 
+vi du bo /user_data/ trong URL
+http://dm-house.jp/user_data/guide/price 
+=>> http://dm-house.jp/guide/price

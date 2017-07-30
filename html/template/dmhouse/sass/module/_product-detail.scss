@@ -1,0 +1,86 @@
+@charset "utf-8";
+/*
+ * product-detail
+ * 商品詳細
+ */
+.product-detail {
+  margin-bottom: $size-widemargin;
+  h2 {
+    color: $color-darkgray;
+    font-size: 20px;
+    border: none;
+    border-bottom: 1px solid $color-borderdarkgray;
+    background: none;
+    padding-left: 0;
+    padding-top: 0;
+    &:before {
+      background: none;
+    }
+  }
+  .product-detail-image-area {
+    text-align: center;
+    img {
+      max-width: 100%;
+    }
+  }
+  .product-detail-info-detail-area {
+    border-bottom: 1px solid $color-borderdarkgray;
+    padding-bottom: 20px;
+    p {
+      margin: 0;
+    }
+  }
+  .product-detail-option-area {
+    border-bottom: 1px solid $color-borderdarkgray;
+    padding-top:20px;
+    padding-bottom: 20px;
+    label {
+      width: 120px;
+      font-size: 14px;
+      font-weight: normal;
+    }
+    input[type="number"] {
+      width: 70px;
+      height: 60px;
+      margin-left: 10px;
+      font-size: 30px;
+      vertical-align: middle;
+    }
+    input[type="checkbox"],
+    input[type="radio"]{
+      width:			24px;
+      height:			24px;
+      -moz-transform:		scale(1.4);
+      -webkit-transform:	scale(1.4);
+      transform:		scale(1.4);
+      margin-right: 10px;
+      vertical-align: bottom;
+    }
+    .product-detail-option-number {
+      display: inline-block;
+      width: 120px;
+      vertical-align: top;
+    }
+    .product-detail-option-number-control {
+      display: inline-block;
+      width: 100px;
+      vertical-align: top;
+    }
+  }
+  .product-detail-price-area {
+    padding-top: 20px;
+    border-bottom: 1px solid $color-borderdarkgray;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    .product-detail-price-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 5px;
+    }
+    .product-detail-price {
+      font-size: 28px;
+      color: $color-red;
+      font-weight: bold;
+    }
+  }
+}

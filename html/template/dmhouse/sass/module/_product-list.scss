@@ -1,0 +1,96 @@
+@charset "utf-8";
+/*
+ * product-list
+ * 商品リスト
+ */
+.product-list-title {
+  font-size: 16px;
+  color: #1c1c1c;
+  margin-bottom: 20px;
+    &:before {
+      content: '●';
+      color: $color-main;
+    }
+}
+.product-list {
+  padding: 0;
+  font-size: 0;
+  margin-left: -14px;
+  margin-right: -14px;
+  li {
+    padding: 0 14px;
+    list-style: none;
+    display: inline-block;
+    margin-bottom: 28px;
+    width: 33.33%;
+    vertical-align: top;
+    .item-box {
+      border: 1px solid $color-borderdarkgray;
+      padding: 25px 20px;
+      .img-area {
+        text-align: center;
+        margin-bottom: 20px;
+        height: 170px;
+        position: relative;
+        img {
+          max-height: 170px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto auto;
+          max-width: 100%;
+        }
+      }
+      .info-area {
+        .product-name {
+          font-size: 14px;
+          color: $color-darkgray;
+          font-weight: normal;
+          margin-bottom: 20px;
+        }
+        .info-area-price-area {
+          text-align: right;
+          margin-bottom: 10px;
+          .unit {
+            font-size: 14px;
+            color: $color-darkgray;
+            font-weight: bold;
+            vertical-align: top;
+            margin-right: 10px;
+          }
+          .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: $color-red;
+          }
+          .tax {
+            font-size: 14px;
+            font-weight: bold;
+            color: $color-red;
+          }
+        }
+        .button-area {
+          margin-bottom: 0;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $size_tab_bp) {
+  .product-list {
+    li {
+      width: 50%;
+    }
+  }
+}
+@media (max-width: $size_sp_bp) {
+  .product-list {
+    li {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@charset "utf-8";
+/*
+ * l-main-contents
+ * メインコンテンツ
+ */
+.l-main-contents {
+  margin-bottom: $size-widemargin;
+}
+
+@media (max-width: $size_sp_bp) {
+  .l-main-contents {
+    margin-bottom: $size-widemargin-sp;
+  }
+}

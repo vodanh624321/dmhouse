@@ -1,0 +1,25 @@
+@charset "utf-8";
+/*
+ * phone-info
+ * 電話番号情報エリア
+ */
+.phone-info {
+  display: inline-block;
+  p {
+    color: $color-white;
+    margin-bottom: 0;
+    &.title {
+      font-size: 12px;
+    }
+    &.phone-number {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    &.sub-info {
+      font-size: 10px;
+    }
+  }
+  &.phone-info-footer {
+    vertical-align: middle;
+  }
+}

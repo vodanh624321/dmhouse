@@ -1,0 +1,149 @@
+@charset "utf-8";
+/*
+ * l-contact
+ * 記事
+ */
+.l-contact {
+	h2{
+		font-size: 26px;
+		font-weight: bold;
+		line-height: 150%;
+	}
+	h3{
+		font-size: 16px;
+		font-weight: bold;
+		line-height: 150%;
+	}
+	h4{
+		font-size: 16px;
+		font-weight: bold;
+	}
+	p{
+		font-size: 16px;
+	}
+	
+	.l-contact-txt{
+		padding: 20px;
+	}
+	
+	.l-contact-form{
+		background: #fff;background: #fff;
+		padding: 20px;
+		border: 2px solid $color-lightgray;
+		border-radius:5px;
+		
+		
+		/* Zohoフォームのスタイル上書き用 */
+		
+		#crmWebToEntityForm{
+			max-width:100% !important;
+			p{
+				display:none !important;
+			}
+			form{
+				max-width:100% !important;
+				table{
+					width: 100% !important;
+					max-width:100% !important;
+					background-color: #fff !important;
+					
+					strong{
+						display:none !important;
+					}
+					td{
+						color: $color-darkblue;
+						width:auto !important;
+						font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", Meiryo, "メイリオ", sans-serif !important;
+						input , textarea{
+							width: 100% !important;
+						}
+						textarea{
+							height: 70px !important;
+						}
+						input[type=reset], input[type=submit] {
+							display: inline-block;
+							padding: 15px 30px;
+							min-width: 300px;
+							width: 300px !important;
+							border: none;
+							border-radius: 5px;
+							background-color: #fff !important;
+							color: #fff !important;
+							font-size: 14px !important;
+							white-space: nowrap;
+							cursor: pointer;
+							font-weight: bold;
+						}
+						input[type=reset]:hover, input[type=submit]:hover {
+							opacity: 0.7;
+						}
+						input[type=reset] {
+							border: none;
+							color: $color-blue !important;
+							margin-top: 10px;
+						}
+						input[type=submit] {
+							background-color: $color-blue !important;
+							margin-top: 15px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+@media (max-width: $size-tab_bp) {
+	
+}
+
+@media (max-width: $size_bootstrap_sp_bp) {
+.l-contact {
+	h2{
+		font-size: 24px;
+		font-weight: bold;
+		line-height: 150%;
+	}
+	h3{
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 150%;
+	}
+	h4{
+		font-size: 14px;
+		font-weight: bold;
+	}
+	p{
+		font-size: 14px;
+	}
+	
+	.l-contact-txt{
+		padding: 0 10px;
+	}
+	
+	.l-contact-form{
+		padding: 0 10px;
+		
+		#crmWebToEntityForm{
+			p{
+			}
+			form{
+				table{
+
+					td{
+						input[type=reset], input[type=submit] {
+							min-width: 100%;
+							width: 100% !important;
+						}
+						input[type=reset] {
+						}
+						input[type=submit] {
+						}
+					}
+				}
+			}
+		}
+	}
+}
+}

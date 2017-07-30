@@ -1,0 +1,41 @@
+Eccube\Entity\ProductPrice:
+    type: entity
+    table: dtb_product_price
+    repositoryClass: Eccube\Repository\ProductPriceRepository
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: product_price_id
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        product_id:
+            type: integer
+            nullable: false
+            unsigned: false
+        from:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: from_number
+        to:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: to_number
+        price:
+            type: decimal
+            nullable: false
+            precision: 10
+            scale: 0
+    manyToOne:
+        Product:
+            targetEntity: Eccube\Entity\Product
+            inversedBy: ProductPrices
+            joinColumn:
+                name: product_id
+                referencedColumnName: product_id
+    lifecycleCallbacks: {  }

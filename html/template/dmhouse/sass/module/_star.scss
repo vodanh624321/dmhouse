@@ -1,0 +1,83 @@
+@charset "utf-8";
+/*
+ * 評価
+ * 評価用のCSS
+ */
+.star-rating {
+  position: relative;
+	display: inline-block;
+  top: 0;
+  left: 0;
+  width: 80px;
+	
+  .star-rating-5,
+	.star-rating-4-half, 
+	.star-rating-4, 
+	.star-rating-3-half, 
+	.star-rating-3, 
+	.star-rating-2-half, 
+	.star-rating-2, 
+	.star-rating-1-half, 
+	.star-rating-1, 
+	.star-rating-0-half, 
+	.star-rating-0 {
+		position: absolute;
+		display: inline-block;
+		top: 0;
+		left: 0;
+		width: 80px;
+	}
+  
+  &:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "FontAwesome";
+    content: "";
+    color: #e5e5e5;
+  }
+	.star-rating-5:before, .star-rating-4-half:before, .star-rating-4:before, .star-rating-3-half:before, .star-rating-3:before, .star-rating-2-half:before, .star-rating-2:before, .star-rating-1-half:before, .star-rating-1:before, .star-rating-0-half:before, .star-rating-0:before {
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+		font-family: "FontAwesome";
+	}
+  .star-rating-5:before, .star-rating-4-half:before, .star-rating-4:before, .star-rating-3-half:before, .star-rating-3:before, .star-rating-2-half:before, .star-rating-2:before, .star-rating-1-half:before, .star-rating-1:before, .star-rating-0-half:before {
+    position: absolute;
+    color: #f2d04a;
+  }
+  .star-rating-0:before {
+    position: absolute;
+    color: #f2d04a;
+    content: "";
+  }
+	
+  .star-rating-0-half:before {
+    content: "";
+  }
+  .star-rating-1:before {
+    content: "";
+  }
+  .star-rating-1-half:before {
+    content: "";
+  }
+  .star-rating-2:before {
+    content: "";
+  }
+  .star-rating-2-half:before {
+    content: "";
+  }
+  .star-rating-3:before {
+    content: "";
+  }
+  .star-rating-3-half:before {
+    content: "";
+  }
+  .star-rating-4:before {
+    content: "";
+  }
+  .star-rating-4-half:before {
+    content: "";
+  }
+  .star-rating-5:before {
+    content: "";
+  }
+}

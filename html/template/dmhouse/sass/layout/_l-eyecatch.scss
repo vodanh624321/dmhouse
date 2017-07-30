@@ -1,0 +1,23 @@
+@charset "utf-8";
+/*
+ * l-eyecatch
+ * アイキャッチ
+ */
+.l-eyecatch {
+  margin-bottom: $size-widemargin;
+  text-align: center;
+  background-color: #ff7000;
+  img {
+    max-width: 100%;
+  }
+}
+@media (max-width: $size_sp_bp) {
+  .l-eyecatch {
+    margin-bottom: $size-narrowmargin-sp;
+    text-align: center;
+    background-color: #ff7000;
+    img {
+      max-width: 100%;
+    }
+  }
+}
