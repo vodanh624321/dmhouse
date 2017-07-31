@@ -351,8 +351,39 @@ $(function() {
         var value = $(this).val();
         if ($("#admin_product_class_price02")) {
             $("#admin_product_class_price02").val(value);
-        };
-    })
+        }
+    });
+
+    $("#add_price #add_price_toggle").click(function () {
+        var key = $(this).data('count') + 1;
+        if (key > 10) {
+            alert('Max is 10');
+            return false;
+        }
+        var _index = key-1;
+        var $priceRow0 = $("#price_row0");
+        var row = $priceRow0.clone();
+        var html = row.html();
+        var new_row = html.replace('from01', 'from0'+key)
+            .replace('to01', 'to0'+key)
+            .replace('price01', 'price0'+key)
+            .replace('admin_product_price_0_from', 'admin_product_price_'+_index+'_from')
+            .replace('admin_product_price_0_to', 'admin_product_price_'+_index+'_to')
+            .replace('admin_product_price_0_price', 'admin_product_price_'+_index+'_price')
+            .replace('admin_product[price][0][from]', 'admin_product[price]['+_index+'][from]')
+            .replace('admin_product[price][0][to]', 'admin_product[price]['+_index+'][to]')
+            .replace('admin_product[price][0][price]', 'admin_product[price]['+_index+'][price]');
+
+        new_row = '<div class="row marT15 marB20" id="price_row'+_index+'">' + new_row + '</div>';
+        var afterRow = _index-1;
+        $(new_row).insertAfter($("#price_row"+afterRow));
+//        $('add_price_toggle').data('count', '');
+
+        $('#add_price_toggle').attr("data-count", key);
+//        console.log(html);
+//        console.log(new_row);
+        console.log(key);
+    });
 });
 
 function fnClass(action) {
@@ -422,7 +453,8 @@ function fnClass(action) {
                                 <div id="detail_description_box__detail" class="col-sm-9 col-lg-10">
                                     {{ form_widget(form.description_detail) }}
                                     {{ form_errors(form.description_detail) }}
-                                    <div id="detail_description_box__list" class="accordion marT15 marB20"><a id="detail_description_box__list_toggle" class="toggle with-icon"><svg class="cb cb-plus icon_plus"> <use xlink:href="#cb-plus" /></svg>一覧コメントを追加</a>
+                                    <div id="detail_description_box__list" class="accordion marT15 marB20">
+                                        <a id="detail_description_box__list_toggle" class="toggle with-icon"><svg class="cb cb-plus icon_plus"> <use xlink:href="#cb-plus" /></svg>一覧コメントを追加</a>
                                         <div class="accpanel padT08">
                                             {{ form_widget(form.description_list) }}
                                             {{ form_errors(form.description_list) }}
@@ -461,23 +493,33 @@ function fnClass(action) {
                                 </div>
                             </div>
                             {% endif %}
-                            {% for arrPrice in form.price %}
-                            <div id="box__price0{{loop.index}}" class="form-group">
-                                {{ form_label(arrPrice.price) }}
-                                <div id="from0{{loop.index}}" class="col-sm-3 col-lg-3">
-                                    {{ form_widget(arrPrice.from) }}
-                                    {{ form_errors(arrPrice.from) }}
+                            <div id="box__price" class="form-group">
+                                {{ form_label(form.price) }}
+                                {% set cnt = 0%}
+                                <div id="box_price_detail" class="col-sm-9 col-lg-10">
+                                {% for arrPrice in form.price %}
+                                    <div class="row" id="price_row{{ loop.index0 }}">
+                                    <div id="from0{{loop.index}}" class="col-sm-2 col-lg-2">
+                                        {{ form_widget(arrPrice.from) }}
+                                        {{ form_errors(arrPrice.from) }}
+                                    </div>
+                                    <div id="to0{{loop.index}}" class="col-sm-2 col-lg-2">
+                                        {{ form_widget(arrPrice.to) }}
+                                        {{ form_errors(arrPrice.to) }}
+                                    </div>
+                                    <div id="price0{{loop.index}}" class="col-sm-3 col-lg-3">
+                                        {{ form_widget(arrPrice.price) }}
+                                        {{ form_errors(arrPrice.price) }}
+                                    </div>
+                                    </div>
+                                    {% set cnt = cnt + 1 %}
+                                {% endfor %}
+                                <div id="add_price" class="accordion marT15 marB20">
+                                    <a id="add_price_toggle" data-count="{{ cnt }}" class="with-icon" style="cursor: pointer;"><svg class="cb cb-plus icon_plus"> <use xlink:href="#cb-plus" /></svg>Add price</a>
                                 </div>
-                                <div id="to0{{loop.index}}" class="col-sm-3 col-lg-3">
-                                    {{ form_widget(arrPrice.to) }}
-                                    {{ form_errors(arrPrice.to) }}
-                                </div>
-                                <div id="price0{{loop.index}}" class="col-sm-3 col-lg-3">
-                                    {{ form_widget(arrPrice.price) }}
-                                    {{ form_errors(arrPrice.price) }}
                                 </div>
                             </div>
-                            {% endfor %}
+
 
                             <div id="detail_box_pc_image" class="form-group">
                                 <label class="col-sm-2 control-label">

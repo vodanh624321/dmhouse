@@ -231,8 +231,8 @@ class ProductController extends AbstractController
 
         $images = $request->files->get('admin_product');
         $filename = null;
-        if (isset($images['price']['pc_image_file'])) {
-            $image = $images['price']['pc_image_file'];
+        if (isset($images['pc_image_file'])) {
+            $image = $images['pc_image_file'];
 
             //ファイルフォーマット検証
             $mimeType = $image->getMimeType();
@@ -245,8 +245,8 @@ class ProductController extends AbstractController
             $image->move($app['config']['image_temp_realdir'], $filename);
         }
 
-        if (isset($images['price']['sp_image_file'])) {
-            $image = $images['price']['sp_image_file'];
+        if (isset($images['sp_image_file'])) {
+            $image = $images['sp_image_file'];
 
             //ファイルフォーマット検証
             $mimeType = $image->getMimeType();
