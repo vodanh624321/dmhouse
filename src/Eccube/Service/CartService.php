@@ -727,35 +727,25 @@ class CartService
     public function calProductPrice($ProductClass, $quantity)
     {
         $Product = $ProductClass->getProduct();
-        $ProductPrice = $Product->getProductPrice();
-        $arrPrice = $ProductPrice->getPrices();
-        $key = null;
-        if ($quantity <= 100) {
-            $key = 'price01';
-        } elseif ($quantity <= 200) {
-            $key = 'price02';
-        } elseif ($quantity <= 300) {
-            $key = 'price03';
-        } elseif ($quantity <= 400) {
-            $key = 'price04';
-        } elseif ($quantity <= 500) {
-            $key = 'price05';
-        } elseif ($quantity <= 1000) {
-            $key = 'price06';
-        } elseif ($quantity <= 1500) {
-            $key = 'price07';
-        } elseif ($quantity <= 2000) {
-            $key = 'price08';
-        } else {
+        $arrPrice = $Product->getArrPrices();
+        $flg = false;
+        
+        if (count($arrPrice) > 0) {
+            foreach ($arrPrice as $key => $value) {
+                if ($quantity >= $value['from'] && $quantity <= $value['to']) {
+                    $price = $value['price'];
+                    $flg = true;
+                    break;
+                }
+            }
+        }
+
+        if (!$flg) {
             return false;
         }
 
-        if ($key != null && isset($arrPrice[$key])) {
-            $total = $arrPrice[$key] * $quantity;
-            $price = $arrPrice[$key];
+        $total = $price * $quantity;
 
-            return array($total, $price);
-        }
-        return false;
+        return array($total, $price);
     }
 }

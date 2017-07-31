@@ -30,6 +30,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormError;
 
 /**
  * Class ProductType.
@@ -69,6 +72,8 @@ class ProductType extends AbstractType
                 'allow_delete' => true,
                 'prototype' => true,
                 'mapped' => false,
+                'error_bubbling' => false,
+                'cascade_validation' => true,
             ))
             // 商品規格情報
             ->add('class', 'admin_product_class', array(
@@ -178,6 +183,22 @@ class ProductType extends AbstractType
                 'required' => false,
             ))
         ;
+
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $data = $event->getData();
+            $form = $event->getForm();
+            $prices = $data->getProductPrices();
+            if ($cnt = count($prices) > 1) {
+                for ($i=0; $i < $cnt; $i++) {
+                    if (isset($prices[$i+1])) {
+                        if ($prices[$i]['to'] >= $prices[$i+1]['from']) {
+                            $form['price']->addError(new FormError('下の行の開始値は、上の行の終了値よりも大きくなければなりません。'));
+                        }
+                    }
+
+                }
+            }
+        });
     }
 
     /**

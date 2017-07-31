@@ -866,6 +866,23 @@ class Product extends \Eccube\Entity\AbstractEntity
     }
 
     /**
+     * Get ProductPrices
+     *
+     * @return array
+     */
+    public function getArrPrices()
+    {
+        $arrTmp = array();
+        foreach ($this->getProductPrices() as $key => $value) {
+            $arrTmp[$key]['id'] = $value->getId();
+            $arrTmp[$key]['from'] = $value->getFrom();
+            $arrTmp[$key]['to'] = $value->getTo();
+            $arrTmp[$key]['price'] = $value->getPrice();
+        }
+        return $arrTmp;
+    }
+
+    /**
      * Add ProductPrices
      *
      * @param  \Eccube\Entity\ProductClass $ProductPrices

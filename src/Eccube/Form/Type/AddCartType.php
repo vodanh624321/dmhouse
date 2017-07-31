@@ -30,6 +30,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContext;
@@ -115,15 +116,36 @@ class AddCartType extends AbstractType
             // $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($Product) {
             //     $data = $event->getData();
             //     $form = $event->getForm();
-            //     if (!is_null($Product->getClassName2())) {
-            //         if ($data['classcategory_id1']) {
-            //             $form->add('classcategory_id2', 'choice', array(
-            //                 'label' => $Product->getClassName2(),
-            //                 'choices' => array('__unselected' => '選択してください') + $Product->getClassCategories2($data['classcategory_id1']),
-            //             ));
-            //         }
-            //     }
-            // });
+                // if (!is_null($Product->getClassName2())) {
+                //     if ($data['classcategory_id1']) {
+                //         $form->add('classcategory_id2', 'choice', array(
+                //             'label' => $Product->getClassName2(),
+                //             'choices' => array('__unselected' => '選択してください') + $Product->getClassCategories2($data['classcategory_id1']),
+                //         ));
+                //     }
+                // }
+                // });
+            $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($Product) {
+                $data = $event->getData();
+                $form = $event->getForm();
+                if (isset($data['quantity'])) {
+                    $quantity = $data['quantity'];
+                    $arrPrice = $Product->getArrPrices();
+                    $flg = false;
+                    if (count($arrPrice) > 0) {
+                        foreach ($arrPrice as $key => $value) {
+                            if ($quantity >= $value['from'] && $quantity <= $value['to']) {
+                                $price = $value['price'];
+                                $flg = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!$flg) {
+                        $form['quantity']->addError(new FormError('許可された制限を超過する場合は、電話してください。'));
+                    }
+                }
+            });
         }
     }
 
@@ -196,6 +218,7 @@ class AddCartType extends AbstractType
             //         )),
             //     ), '[classcategory_id2]');
             // }
+            // dump($data);
 
         }
     }

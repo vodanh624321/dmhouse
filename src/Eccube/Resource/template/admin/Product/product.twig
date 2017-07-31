@@ -354,35 +354,77 @@ $(function() {
         }
     });
 
-    $("#add_price #add_price_toggle").click(function () {
-        var key = $(this).data('count') + 1;
-        if (key > 10) {
-            alert('Max is 10');
-            return false;
-        }
-        var _index = key-1;
+    $("#add_price_toggle").click(function () {
+        var _index = $(this).data('num');
+        var key = _index + 1;
         var $priceRow0 = $("#price_row0");
         var row = $priceRow0.clone();
-        var html = row.html();
-        var new_row = html.replace('from01', 'from0'+key)
-            .replace('to01', 'to0'+key)
-            .replace('price01', 'price0'+key)
-            .replace('admin_product_price_0_from', 'admin_product_price_'+_index+'_from')
-            .replace('admin_product_price_0_to', 'admin_product_price_'+_index+'_to')
-            .replace('admin_product_price_0_price', 'admin_product_price_'+_index+'_price')
-            .replace('admin_product[price][0][from]', 'admin_product[price]['+_index+'][from]')
-            .replace('admin_product[price][0][to]', 'admin_product[price]['+_index+'][to]')
-            .replace('admin_product[price][0][price]', 'admin_product[price]['+_index+'][price]');
 
-        new_row = '<div class="row marT15 marB20" id="price_row'+_index+'">' + new_row + '</div>';
-        var afterRow = _index-1;
-        $(new_row).insertAfter($("#price_row"+afterRow));
-//        $('add_price_toggle').data('count', '');
+        $(row).find('div').each(function() {
+            var id = $(this).attr('id');
+            if ('from01' == id) {
+                $(this).attr('id', 'from0'+key);
+                $(this).find('input').attr('id', 'admin_product_price_'+_index+'_from').attr('name', 'admin_product[price]['+_index+'][from]');
+            };
 
-        $('#add_price_toggle').attr("data-count", key);
+            if ('to01' == id) {
+                $(this).attr('id', 'to0'+key);
+                $(this).find('input').attr('id', 'admin_product_price_'+_index+'_to').attr('name', 'admin_product[price]['+_index+'][to]');
+            };
+
+            if ('price01' == id) {
+                $(this).attr('id', 'price0'+key);
+                $(this).find('input').attr('id', 'admin_product_price_'+_index+'_price').attr('name', 'admin_product[price]['+_index+'][price]');
+            };
+
+            if ('box_price_detail_delete-0' == id) {
+                $(this).attr('id', 'box_price_detail_delete-'+_index);
+                $(this).find('button').data('id', _index);
+                $(this).find('button').attr('data-id', _index);
+                $(this).attr('style', '');
+            };
+        });
+        $(row).attr('id', 'price_row'+_index);
+        $(row).find('button').data('id', _index);
+        $(row).find('button').attr('data-id', _index);
+        $('#box_price').append($(row));
+
+//         var html = row.html();
+//         var new_row = html.replace('from01', 'from0'+key)
+//             .replace('to01', 'to0'+key)
+//             .replace('price01', 'price0'+key)
+//             .replace('admin_product_price_0_from', 'admin_product_price_'+_index+'_from')
+//             .replace('admin_product_price_0_to', 'admin_product_price_'+_index+'_to')
+//             .replace('admin_product_price_0_price', 'admin_product_price_'+_index+'_price')
+//             .replace('admin_product[price][0][from]', 'admin_product[price]['+_index+'][from]')
+//             .replace('admin_product[price][0][to]', 'admin_product[price]['+_index+'][to]')
+//             .replace('admin_product[price][0][price]', 'admin_product[price]['+_index+'][price]')
+//             .replace('box_price_detail_delete-0', 'box_price_detail_delete-'+_index)
+//             .replace('data-id="0"', 'data-id="'+_index+'"')
+//             .replace('style="display:none;"', '')
+// ;
+
+        // new_row = '<div class="row marT15 marB20" id="price_row'+_index+'">' + new_row + '</div>';
+        // var afterRow = _index-1;
+        // $('#box_price').append($(new_row));
+        // $(new_row).insertAfter($("#price_row"+afterRow));
+        // button = '<div id="box_price_detail_delete-'+_index+'" class="icon_delete" data-id="'+_index+'">';
+        // button += '<button type="button" class="btn btn-default btn-sm delete-item">削除</button></div>';
+        // $('#price_row'+_index).append($(button));
+//        $('add_price_toggle').data('num', '');
+        $(this).data('num', key);
+        $(this).attr("data-num", key);
 //        console.log(html);
 //        console.log(new_row);
-        console.log(key);
+        // console.log(key);
+        // console.log(afterRow);
+        return true;
+    });
+    $(document).on('click', '.icon_delete', function() {
+        var rowNum = $(this).find('button').data('id');
+        // console.log(rowNum);
+        $("#price_row"+rowNum).remove();
+        return false;
     });
 });
 
@@ -495,27 +537,35 @@ function fnClass(action) {
                             {% endif %}
                             <div id="box__price" class="form-group">
                                 {{ form_label(form.price) }}
-                                {% set cnt = 0%}
+                                {% set cnt = 0 %}
                                 <div id="box_price_detail" class="col-sm-9 col-lg-10">
+                                <div id="box_price">
                                 {% for arrPrice in form.price %}
-                                    <div class="row" id="price_row{{ loop.index0 }}">
-                                    <div id="from0{{loop.index}}" class="col-sm-2 col-lg-2">
-                                        {{ form_widget(arrPrice.from) }}
-                                        {{ form_errors(arrPrice.from) }}
-                                    </div>
-                                    <div id="to0{{loop.index}}" class="col-sm-2 col-lg-2">
-                                        {{ form_widget(arrPrice.to) }}
-                                        {{ form_errors(arrPrice.to) }}
-                                    </div>
-                                    <div id="price0{{loop.index}}" class="col-sm-3 col-lg-3">
-                                        {{ form_widget(arrPrice.price) }}
-                                        {{ form_errors(arrPrice.price) }}
-                                    </div>
+                                    <div class="row marT15 marB20" id="price_row{{ loop.index0 }}">
+                                        <div id="from0{{loop.index}}" class="col-sm-2 col-lg-2">
+                                            {{ form_widget(arrPrice.from) }}
+                                            {{ form_errors(arrPrice.from) }}
+                                        </div>
+                                        <div id="to0{{loop.index}}" class="col-sm-2 col-lg-2">
+                                            {{ form_widget(arrPrice.to) }}
+                                            {{ form_errors(arrPrice.to) }}
+                                        </div>
+                                        <div id="price0{{loop.index}}" class="col-sm-3 col-lg-3">
+                                            {{ form_widget(arrPrice.price) }}
+                                            {{ form_errors(arrPrice.price) }}
+                                        </div>
+                                    
+                                        <div id="box_price_detail_delete-{{ loop.index0 }}" class="icon_delete"  {% if loop.index0 == 0 %}style="display:none;"{% endif %}>
+                                            <button type="button" data-id="{{loop.index0}}" class="btn btn-default btn-sm delete-item">削除</button>
+                                        </div>
+                                    
                                     </div>
                                     {% set cnt = cnt + 1 %}
                                 {% endfor %}
+                                </div>
+                                {{ form_errors(form.price) }}
                                 <div id="add_price" class="accordion marT15 marB20">
-                                    <a id="add_price_toggle" data-count="{{ cnt }}" class="with-icon" style="cursor: pointer;"><svg class="cb cb-plus icon_plus"> <use xlink:href="#cb-plus" /></svg>Add price</a>
+                                    <a id="add_price_toggle" data-num="{{ cnt }}" class="with-icon" style="cursor: pointer;"><svg class="cb cb-plus icon_plus"> <use xlink:href="#cb-plus" /></svg>Add price</a>
                                 </div>
                                 </div>
                             </div>

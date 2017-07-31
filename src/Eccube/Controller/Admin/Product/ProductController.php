@@ -281,9 +281,9 @@ class ProductController extends AbstractController
             $ProductClass->setProductStock($ProductStock);
             $ProductStock->setProductClass($ProductClass);
 
-            $Price = new \Eccube\Entity\ProductPrice();
-            $Price->setProduct($Product);
-            $Prices[] = $Price;
+            // $Price = new \Eccube\Entity\ProductPrice();
+            // $Price->setProduct($Product);
+            // $Prices[] = $Price;
         } else {
             $Product = $app['eccube.repository.product']->find($id);
             if (!$Product) {
@@ -300,12 +300,12 @@ class ProductController extends AbstractController
                 }
                 $ProductStock = $ProductClasses[0]->getProductStock();
             }
-            $Prices = $Product->getProductPrices();
-            if (count($Prices) == 0) {
-                $Price = new \Eccube\Entity\ProductPrice();
-                $Price->setProduct($Product);
-                $Prices[] = $Price;
-            }
+            // $Prices = $Product->getProductPrices();
+            // if (count($Prices) == 0) {
+            //     $Price = new \Eccube\Entity\ProductPrice();
+            //     $Price->setProduct($Product);
+            //     $Prices[] = $Price;
+            // }
         }
 
         $builder = $app['form.factory']
@@ -331,6 +331,17 @@ class ProductController extends AbstractController
             $ProductClass->setStockUnlimited((boolean)$ProductClass->getStockUnlimited());
             $form['class']->setData($ProductClass);
         }
+
+        $Prices = $Product->getProductPrices();
+        if (count($Prices) == 0) {
+            $Price = new \Eccube\Entity\ProductPrice();
+            $Price->setProduct($Product);
+            $Prices[] = $Price;
+        }
+        // foreach ($Prices as $Price) {
+        //     $Prices[] = $Price->getCategory();
+        // }
+
         $form['price']->setData($Prices);
         // ファイルの登録
         $images = array();
@@ -399,7 +410,6 @@ class ProductController extends AbstractController
                     }
                     $app['orm.em']->persist($ProductStock);
                 }
-
                 // カテゴリの登録
                 // 一度クリア
                 /* @var $Product \Eccube\Entity\Product */
@@ -407,6 +417,24 @@ class ProductController extends AbstractController
                     $Product->removeProductCategory($ProductCategory);
                     $app['orm.em']->remove($ProductCategory);
                 }
+                
+                
+                $Prices = $Product->getProductPrices();
+                $arrProductPrice = array();
+                foreach ($Prices as $ProductPrice) {
+                    $ProductPrice->setProductId($Product->getId());
+                    $ProductPrice->setProduct($Product);
+                    $app['orm.em']->persist($ProductPrice);
+                    $arrProductPrice[] = $ProductPrice->getId();
+                }
+                // remove old prices
+                $OldPrices = $app['eccube.repository.product_price']->findBy(array('Product' => $Product));
+                foreach ($OldPrices as $value) {
+                    if (!in_array($value->getId(), $arrProductPrice)) {
+                        $app['orm.em']->remove($value);
+                    }
+                }
+
                 $app['orm.em']->persist($Product);
                 $app['orm.em']->flush();
 
@@ -529,18 +557,6 @@ class ProductController extends AbstractController
                 }
 
                 $Product->setUpdateDate(new \DateTime());
-                $app['orm.em']->flush();
-
-                // Product price
-                $Prices = $form['price']->getData();
-                foreach ($Prices as $key => $Price) {
-                    $Price->setProductId($Product->getId());
-                    $Product->addProductPrice($Price);
-                    // $Price->setProduct($Product);
-                    // $Price->setProduct($Product->getId());
-                    $app['orm.em']->persist($Price);
-                }
-                
                 $app['orm.em']->flush();
 
                 log_info('商品登録完了', array($id));

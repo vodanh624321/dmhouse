@@ -33,9 +33,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {% endblock %}
 {% block javascript %}
 <script>
-var arrPrice = {{ Product.ProductPrice.prices|json_encode|raw }};
-var key = 'price01';
-var total = arrPrice['price01'];
+var arrPrice = {{ Product.arr_prices|json_encode|raw }};
+var price = 0;
 $(function(){
     // $('#add-cart').click(function() {
     //     $('#mode').val('add_cart');
@@ -50,29 +49,22 @@ $(function(){
 
     $('.category').change(function() {
         var class_id = $(this).data('class');
-        console.log(class_id);
+        // console.log(class_id);
         $('#product_class_id').val(class_id);
     });
 });
     function calPrice(quantity = 1) {
         if ($.isNumeric(quantity) && quantity > 0) {
-            if (quantity <= 100) {
-                key = 'price01';
-            } else if (quantity <= 200) {
-                key = 'price02';
-            } else if (quantity <= 300) {
-                key = 'price03';
-            } else if (quantity <= 400) {
-                key = 'price04';
-            } else if (quantity <= 500) {
-                key = 'price05';
-            } else if (quantity <= 1000) {
-                key = 'price06';
-            } else if (quantity <= 1500) {
-                key = 'price07';
-            } else if (quantity <= 2000) {
-                key = 'price08';
-            } else {
+            var index;
+            var flg = false;
+            for (index = 0; index < arrPrice.length; ++index) {
+                if (quantity >= arrPrice[index]['from'] && quantity <= arrPrice[index]['to']) {
+                    price = arrPrice[index]['price'];
+                    flg = true;
+                    break;
+                };
+            }
+            if (flg == false) {
                 alert('お見積もり');
                 return false;
             }
@@ -81,13 +73,8 @@ $(function(){
             return false;
         }
 
-// console.log(key);
-// console.log(arrPrice[key]);
-        if (arrPrice[key]) {
-            total = arrPrice[key] * quantity;
-            // console.log(total);
-            document.getElementById("price").innerHTML = '￥'+total;
-        }
+        total = price * quantity;
+        document.getElementById("price").innerHTML = '￥'+total;
         return true;
     }
 </script>
@@ -168,15 +155,15 @@ $(function(){
             </div>
 
             <div class="product-detail-option-area">
-              <div class="product-detail-option-number">部数
-              {{ form_widget(form.quantity, { attr : { class : 'dd', style : 'width: 160px' } }) }}
+              <div class="product-detail-option-number" style="width: 100%;">部数
+              {{ form_widget(form.quantity, { attr : { class : '', style : 'width: 160px' } }) }}
               {{ form_errors(form.quantity) }}
               </div>
             </div>
 
             <div class="product-detail-price-area">
               <p class="product-detail-price-title">合計金額：</p>
-              <p class="product-detail-price" id="price">￥{{Product.ProductPrice.price01}}</p>
+              <p class="product-detail-price" id="price">￥{{Product.ProductPrices[0].price}}</p>
             </div>
             <button id="add-cart" class="button button-red button-product-detail" type="submit" value="買い物カゴに入れる"><i class="fa fa-cart-plus" aria-hidden="true"></i>買い物カゴに入れる</button>
             </form>
@@ -185,12 +172,10 @@ $(function(){
 
     <h2>価格例</h2>
     <div class="pricelist row">
-    {% if Product.ProductPrice|length > 0 %}
-        {% if is_sp %}
-            <div class="price-image col-sm-12" ><img src="{{ app.config.image_save_urlpath }}/{{ Product.ProductPrice.sp_image|no_image_product }}"/></div>
-        {% else %}
-            <div class="price-image col-sm-12" ><img src="{{ app.config.image_save_urlpath }}/{{ Product.ProductPrice.pc_image|no_image_product }}"/></div>
-        {% endif %}
+    {% if is_sp %}
+        <div class="price-image col-sm-12" ><img src="{{ app.config.image_save_urlpath }}/{{ Product.sp_image|no_image_product }}"/></div>
+    {% else %}
+        <div class="price-image col-sm-12" ><img src="{{ app.config.image_save_urlpath }}/{{ Product.pc_image|no_image_product }}"/></div>
     {% endif %}
     </div>
 

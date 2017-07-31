@@ -29,6 +29,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,6 +51,7 @@ class ProductPriceType extends AbstractType
         $app = $this->app;
 
         $builder
+        // ->add('id', 'hidden')
         ->add('from', 'number', array(
                 'label' => 'From',
                 'required' => false,
@@ -88,6 +90,16 @@ class ProductPriceType extends AbstractType
                 ),
             ))
             ;
+
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $data = $event->getData();
+            $form = $event->getForm();
+            if (isset($data['from']) && isset($data['to'])) {
+                if ($data['from'] > $data['to']) {
+                    $form['from']->addError(new FormError('開始番号は終了番号より小さくなければなりません。.'));
+                }
+            }
+        });
     }
 
     /**

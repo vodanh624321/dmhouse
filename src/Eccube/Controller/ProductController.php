@@ -325,6 +325,9 @@ class ProductController
         if ($app['mobile_detect']->isMobile()) {
             $isSP = true;
         }
+        // $Prices = $app['eccube.repository.product_price'];
+        // dump($Product->getArrPrices());
+
         return $app->render('Product/detail.twig', array(
             'title' => $this->title,
             'subtitle' => $Product->getName(),

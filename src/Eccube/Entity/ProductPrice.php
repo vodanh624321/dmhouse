@@ -44,23 +44,9 @@ class ProductPrice extends \Eccube\Entity\AbstractEntity
      */
     private $Product;
 
-    private $prices = array();
-
     public function __clone()
     {
         $this->id = null;
-    }
-
-    public function getPrices()
-    {
-        $vars = get_object_vars($this);
-        foreach ($vars as $key => $value) {
-            if (strpos($key, 'price0') !== false) {
-                $this->prices[$key] = $value;
-            }
-        }
-
-        return $this->prices;
     }
 
     /**
@@ -151,8 +137,8 @@ class ProductPrice extends \Eccube\Entity\AbstractEntity
         return $this->Product;
     }
 
-
     private $from;
+
     /**
      * Get id
      *
