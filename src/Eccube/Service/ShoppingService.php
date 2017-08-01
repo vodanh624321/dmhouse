@@ -503,7 +503,11 @@ class ShoppingService
         $TaxRule = $this->app['eccube.repository.tax_rule']->getByRule($Product, $ProductClass);
 
         // product price Dung Le
-        list($subtotal, $price)  = $this->app['eccube.service.cart']->calProductPrice($ProductClass, $quantity);
+        list($subtotal, $price)  = $this->cartService->calProductPrice($ProductClass, $quantity);
+        if ($subtotal == null || $price == null) {
+            // $this->setError('cart.quantity.invalid');
+            throw new CartException('cart.quantity.invalid');
+        }
         $OrderDetail->setProduct($Product)
             ->setProductClass($ProductClass)
             ->setProductName($Product->getName())
@@ -569,6 +573,10 @@ class ShoppingService
 
         // dung product price
         list($subtotal, $price) = $this->cartService->calProductPrice($ProductClass, $quantity);
+        if ($subtotal == null || $price == null) {
+            // $this->setError('cart.quantity.invalid');
+            throw new CartException('cart.quantity.invalid');
+        }
         $ShipmentItem->setShipping($Shipping)
             ->setOrder($Order)
             ->setProductClass($ProductClass)

@@ -290,7 +290,12 @@ class CartService
         // die;
         $price = null;
         // Dung Le add product price
-        list($tmp_subtotal, $price)  = $this->calProductPrice($ProductClass, $quantity);
+        list($subtotal, $price)  = $this->calProductPrice($ProductClass, $quantity);
+        if ($subtotal == null || $price == null) {
+            // $this->setError('cart.quantity.invalid');
+            throw new CartException('cart.quantity.invalid');
+        }
+        $tmp_subtotal += $subtotal;
         $tmp_quantity += $quantity;
         if ($tmp_subtotal > $this->app['config']['max_total_fee']) {
             $this->setError('cart.over.price_limit');
@@ -311,7 +316,7 @@ class CartService
         // 制限数チェック(在庫不足の場合は、処理の中でカート内商品を削除している)
         $quantity = $this->setProductLimit($ProductClass, $productName, $tmp_quantity);
 
-		// 新しい数量でカート内商品を登録する
+        // 新しい数量でカート内商品を登録する
         if (0 < $quantity) {
             $CartItem = new CartItem();
             $CartItem

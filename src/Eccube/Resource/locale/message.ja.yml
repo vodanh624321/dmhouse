@@ -65,6 +65,7 @@ cart.product.not.status: 現時点で購入できない商品が含まれてお�
 cart.product.not.producttype: |-
   「%product%」はまだ配送の準備ができておりません。
   恐れ入りますがお問い合わせページよりお問い合わせください。
+cart.quantity.invalid: 番号が無効です。お電話ください。
 
 shopping.multiple.delivery: 配送方法が異なる商品が含まれているため、お届け先は複数となります。
 shopping.multiple.quantity.diff: 数量の合計が、カゴの中の数量と異なっています。
