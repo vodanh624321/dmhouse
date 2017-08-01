@@ -187,15 +187,18 @@ class ProductType extends AbstractType
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
             $data = $event->getData();
             $form = $event->getForm();
+            /**
+             * @var $prices ArrayCollection;
+             */
             $prices = $data->getProductPrices();
             if ($cnt = count($prices) > 1) {
-                for ($i=0; $i < $cnt; $i++) {
-                    if (isset($prices[$i+1])) {
-                        if ($prices[$i]['to'] >= $prices[$i+1]['from']) {
+                $arrValue = $prices->getValues();
+                for ($i = 0; $i < $cnt; $i++) {
+                    if (isset($arrValue[$i+1])) {
+                        if ($arrValue[$i]['to'] >= $arrValue[$i+1]['from']) {
                             $form['price']->addError(new FormError('下の行の開始値は、上の行の終了値よりも大きくなければなりません。'));
                         }
                     }
-
                 }
             }
         });
