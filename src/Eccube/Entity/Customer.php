@@ -1239,4 +1239,76 @@ class Customer extends \Eccube\Entity\AbstractEntity implements UserInterface
 
         return $this;
     }
+
+    private $company_name_kana;
+    /**
+     * Set company_name
+     *
+     * @param  string   $companyName
+     * @return Customer
+     */
+    public function setCompanyNameKana($companyName)
+    {
+        $this->company_name_kana = $companyName;
+
+        return $this;
+    }
+
+    /**
+     * Get company_name_kana
+     *
+     * @return string
+     */
+    public function getCompanyNameKana()
+    {
+        return $this->company_name_kana;
+    }
+
+    private $full_tel;
+    /**
+     * Set company_name
+     *
+     * @param  string   $companyName
+     * @return Customer
+     */
+    public function setFullTel($companyName)
+    {
+        $this->full_tel = $companyName;
+
+        return $this;
+    }
+
+    /**
+     * Get full_tel
+     *
+     * @return string
+     */
+    public function getFullTel()
+    {
+        return $this->full_tel;
+    }
+
+    private $full_mobile;
+    /**
+     * Set company_name
+     *
+     * @param  string   $companyName
+     * @return Customer
+     */
+    public function setFullMobile($companyName)
+    {
+        $this->full_mobile = $companyName;
+
+        return $this;
+    }
+
+    /**
+     * Get full_mobile
+     *
+     * @return string
+     */
+    public function getFullMobile()
+    {
+        return $this->full_mobile;
+    }
 }

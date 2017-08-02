@@ -51,6 +51,15 @@ Eccube\Entity\Customer:
         company_name:
             type: text
             nullable: true
+        company_name_kana:
+            type: text
+            nullable: true
+        full_tel:
+            type: text
+            nullable: false
+        full_mobile:
+            type: text
+            nullable: true
         zip01:
             type: text
             nullable: true

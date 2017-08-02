@@ -22,9 +22,41 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {% extends 'default_frame.twig' %}
 
 {% set body_class = 'registration_page' %}
-
+{% block breadcrumb %}
+<div class="l-breadcrumb container">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ url('homepage') }}">TOP</a></li>
+    <li class="breadcrumb-item">利用規約</li>
+  </ol>
+</div>
+{% endblock %}  
 {% block main %}
-    <h1 class="page-heading">新規会員登録（完了）</h1>
+      <h2>利用規約</h2>
+
+      <div class="flow-box" class="row">
+         <div class="flow-box-item col-sm-3">
+          <p>規約承認</p>
+         </div>
+         <div class="flow-box-item col-sm-3">
+          <p>登録内容入力</p>
+         </div>
+         <div class="flow-box-item col-sm-3">
+          <p>入力内容確認</p>
+         </div>
+         <div class="flow-box-item col-sm-3">
+          <p class="active">登録完了</p>
+         </div>
+      </div>
+      <div class="contact-form">
+        <p>
+          会員登録いただきありがとうございます。<br>
+          ご入力頂きましたメールアドレス宛に確認のメールをお送りさせて頂きました。<br>
+          <br>
+          お客様から頂いたEメールアドレスが違っている場合や、<br>
+          システム障害などにより確認メールを上手くお送りできない場合がございます。
+        </p>
+      </div>
+<!--     <h1 class="page-heading">新規会員登録（完了）</h1>
     <div id="complete_box" class="container-fluid">
         <div id="deliveradd_input" class="row">
             <div id="complete_box__body" class="col-sm-10 col-sm-offset-1">
@@ -43,7 +75,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
                         </p>
                     </div>
                 </div>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div>
+            </div>
+        </div>
+    </div> -->
 {% endblock %}

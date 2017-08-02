@@ -59,16 +59,81 @@ class EntryType extends AbstractType
                     )),
                 ),
             ))
-            ->add('zip', 'zip')
+            ->add('company_name_kana', 'text', array(
+                'label' => '会社名カナ',
+                'required' => false,
+                'constraints' => array(
+                    new Assert\Length(array(
+                        'max' => $this->config['stext_len'],
+                    )),
+                    new Assert\Regex(array(
+                        'pattern' => "/^[ァ-ヶｦ-ﾟー]+$/u",
+                    )),
+                ),
+            ))
+            ->add('full_tel', 'text', array(
+                'label' => '携帯番号',
+                'required' => true,
+                'constraints' => array(
+                    new Assert\Length(array(
+                        'min' => 11,
+                        'max' => 14,
+                    )),
+                    new Assert\Regex(array(
+                        'pattern' => "/^\d+$/u",
+                        'message' => 'form.type.numeric.invalid',
+                    )),
+                ),
+            ))
+            ->add('full_mobile', 'text', array(
+                'label' => 'お電話番号',
+                'required' => false,
+                'constraints' => array(
+                    new Assert\Length(array(
+                        'min' => 11,
+                        'max' => 14,
+                    )),
+                    new Assert\Regex(array(
+                        'pattern' => "/^\d+$/u",
+                        'message' => 'form.type.numeric.invalid',
+                    )),
+                ),
+            ))
+            ->add('zip', 'zip', array('label' => '郵便番号'))
             ->add('address', 'address')
             ->add('tel', 'tel', array(
-                'required' => true,
+                'required' => false,
             ))
             ->add('fax', 'tel', array(
                 'required' => false,
             ))
-            ->add('email', 'repeated_email')
-            ->add('password', 'repeated_password')
+            ->add('email', 'email', array(
+                'label' => 'メールアドレス',
+                'required' => true,
+                'constraints' => array(
+                    new Assert\NotBlank(),
+                    new Assert\Email(array('strict' => true)),
+                    new Assert\Regex(array(
+                        'pattern' => '/^[[:graph:][:space:]]+$/i',
+                        'message' => 'form.type.graph.invalid',
+                    )),
+                ),
+            ))
+            ->add('password', 'password', array(
+                'label' => 'パスワード',
+                'required' => true,
+                'constraints' => array(
+                    new Assert\NotBlank(),
+                    new Assert\Length(array(
+                        'min' => $this->config['password_min_len'],
+                        'max' => $this->config['password_max_len'],
+                    )),
+                    new Assert\Regex(array(
+                        'pattern' => '/^[[:graph:][:space:]]+$/i',
+                        'message' => 'form.type.graph.invalid',
+                    )),
+                ),
+            ))
             ->add('birth', 'birthday', array(
                 'required' => false,
                 'input' => 'datetime',
